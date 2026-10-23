@@ -3,46 +3,282 @@
   --ink: #1D2321;
   --accent: #2F7D4F;
   --line: #DADFDA;
+  --forest: #14382A;
+  --mint: #CFE6D8;
+  --muted: #5B6661;
+  --serif: "Fraunces", Georgia, "Times New Roman", serif;
+  --sans: "Manrope", "Segoe UI", Arial, sans-serif;
+  --wrap: 1120px;
 }
 
 * { box-sizing: border-box; }
 
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.65;
   background: var(--bg);
   color: var(--ink);
+  -webkit-font-smoothing: antialiased;
 }
 
+a { color: var(--accent); }
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- En-tête ---------- */
 .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 40px;
+  gap: 16px;
+  padding: 18px max(24px, calc((100% - var(--wrap)) / 2));
+  background: rgba(243, 244, 241, 0.92);
+  backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--line);
 }
 
-.site-header nav a {
-  margin-left: 20px;
+.logo {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--forest);
   text-decoration: none;
-  color: var(--ink);
 }
 
+.site-header nav a {
+  margin-left: 28px;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--ink);
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.site-header nav a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* ---------- Accueil ---------- */
 .hero {
-  text-align: center;
-  padding: 80px 20px;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 64px;
+  align-items: center;
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 96px 24px 88px;
 }
 
 .hero h1 {
-  font-size: 32px;
-  margin-bottom: 10px;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(40px, 6vw, 68px);
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  color: var(--forest);
+  margin: 0 0 22px;
 }
 
+.lead {
+  max-width: 30em;
+  font-size: 20px;
+  color: var(--muted);
+  margin: 0 0 36px;
+}
+
+.actions { display: flex; flex-wrap: wrap; gap: 14px; }
+
+.btn {
+  display: inline-block;
+  padding: 14px 26px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  border: 1.5px solid transparent;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { background: var(--forest); }
+
+.btn-ghost { color: var(--forest); border-color: var(--forest); }
+.btn-ghost:hover { background: var(--forest); color: #fff; }
+
+.btn-light { background: var(--mint); color: var(--forest); }
+.btn-light:hover { background: #fff; }
+
+/* Carte de code */
+.code-card {
+  margin: 0;
+  background: var(--forest);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 24px 48px -24px rgba(20, 56, 42, 0.55);
+}
+
+.code-bar {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(207, 230, 216, 0.14);
+}
+
+.code-bar span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(207, 230, 216, 0.3);
+}
+
+.code-bar em {
+  margin-left: auto;
+  font-style: normal;
+  font-size: 13px;
+  color: rgba(207, 230, 216, 0.65);
+}
+
+.code-card pre {
+  margin: 0;
+  padding: 28px 28px 32px;
+  overflow-x: auto;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--mint);
+}
+
+.code-card .k { color: #7FD4A0; }
+
+/* ---------- Sections ---------- */
+.section {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 72px 24px;
+  border-top: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 64px;
+}
+
+.section-head h2,
+.join h2 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(28px, 3.4vw, 38px);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--forest);
+  margin: 0 0 12px;
+}
+
+.section-head p { margin: 0; color: var(--muted); }
+
+.rows, .agenda { list-style: none; margin: 0; padding: 0; }
+
+.rows li {
+  padding: 0 0 28px;
+  margin: 0 0 28px;
+  border-bottom: 1px solid var(--line);
+}
+
+.rows li:last-child { border-bottom: 0; margin-bottom: 0; padding-bottom: 0; }
+
+.rows h3 {
+  font-size: 19px;
+  margin: 0 0 6px;
+  color: var(--ink);
+}
+
+.rows p { margin: 0; max-width: 36em; color: var(--muted); }
+
+/* Agenda */
+.agenda li {
+  display: grid;
+  grid-template-columns: 9em 1fr auto;
+  gap: 24px;
+  align-items: baseline;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.agenda li:first-child { padding-top: 0; }
+.agenda li:last-child { border-bottom: 0; }
+
+.agenda .when { font-weight: 700; color: var(--accent); }
+.agenda .what { font-weight: 500; }
+.agenda .where { font-size: 15px; color: var(--muted); }
+
+/* Bandeau d'adhésion */
+.join {
+  max-width: var(--wrap);
+  margin: 24px auto 0;
+  padding: 56px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+  background: var(--forest);
+  border-radius: 14px;
+}
+
+.join h2 { color: #fff; }
+.join p { margin: 0; color: var(--mint); }
+
+/* ---------- Pied de page ---------- */
 .site-footer {
   text-align: center;
-  padding: 30px 20px;
+  padding: 40px 20px 48px;
   border-top: 1px solid var(--line);
-  margin-top: 40px;
+  margin-top: 72px;
+  color: var(--muted);
 }
 
-/* NOUVEAUX STYLES ICI */
+.site-footer p { margin: 0 0 6px; }
+.site-footer a { font-weight: 700; text-decoration: none; }
+.site-footer a:hover { text-decoration: underline; }
+.site-footer .legal { font-size: 14px; }
+
+/* ---------- Mobile ---------- */
+@media (max-width: 860px) {
+  .site-header { padding: 14px 20px; }
+  .site-header nav a { margin-left: 16px; font-size: 14px; }
+
+  .hero { grid-template-columns: 1fr; gap: 48px; padding: 56px 20px 56px; }
+  .section { grid-template-columns: 1fr; gap: 28px; padding: 56px 20px; }
+
+  .agenda li { grid-template-columns: 1fr; gap: 2px; }
+
+  .join {
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 24px 20px 0;
+    padding: 40px 28px;
+  }
+}
+
+@media (max-width: 520px) {
+  .logo { font-size: 19px; }
+  .site-header nav a:nth-child(2) { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+}
